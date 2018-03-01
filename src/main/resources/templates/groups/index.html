@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontakty - Lista Grup</title>
+  <th:block th:include="fragments/head :: head"></th:block>
+</head>
+<body>
+  <th:block th:include="fragments/header :: body"></th:block>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="panel panel-default">
+
+                <div class="panel-heading"> GRUPY <a th:href="@{/groups/add}" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nazwa</th>
+                        <th>Akcje</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div th:if="!${#lists.isEmpty(groups)}">
+                        <tr th:each = "groups : ${groups}">
+                            <td th:text = "${groups.id}"></td>
+                            <td th:text = "${groups.name}"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <a th:href="${'/groups/view/' + groups.id}" class="btn btn-info"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                    <a th:href="${'/groups/edit/' + groups.id}" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                    <a th:href="${'/groups/delete/' + groups.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
+                    <div th:if="${#lists.isEmpty(groups)}">
+                        <tr>
+                            <td>BRAK GRUP DO WYŚWIETLENIA</td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+ <th:block th:include="fragments/js :: body"></th:block>
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+</html>

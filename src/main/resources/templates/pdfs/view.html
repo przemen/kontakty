@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts - CRUD in Spring Boot with Spring Data JPA</title>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <!--<div class="container">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Kontakt</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="inputId">ID</label>
+                        <input type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{contact.id}" name="id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFirstName">Imię</label>
+                        <input type="text" class="form-control" id="inputFirstName" placeholder="Imię" th:field="*{contact.firstName}" name="firstName" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName">Nazwisko</label>
+                        <input type="text" class="form-control" id="inputLastName" placeholder="Nazwisko" th:field="*{contact.lastName}" name="lastName" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="Address" th:field="*{contact.address}" name="address" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Numer</th>
+                            <th>Typ</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:if="!${#lists.isEmpty(phoneNumbers)}">
+                            <tr th:each = "phoneNumber : ${phoneNumbers}">
+                                <td th:text = "${phoneNumber.number}"></td>
+                                <td th:text = "${phoneNumber.type}"></td>
+                            </tr>
+                        </div>
+                        <div th:if="${#lists.isEmpty(phoneNumbers)}">
+                            <tr>
+                                <td>Brak numerów dla tego kontaktu!</td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

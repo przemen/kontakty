@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontakty - Dodaj Grupę</title>
+  <th:block th:include="fragments/head :: head"></th:block>
+</head>
+<body>
+  <th:block th:include="fragments/header :: body"></th:block>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <!--<div class="container">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Dodaj Grupę</div>
+                <div class="panel-body">
+                    <form action="/groups/add" th:action="@{/groups/add}" th:object="${group}" method="post">
+                        <div class="form-group">
+                            <label for="inputName">Nazwa</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Nazwa grupy" th:field="*{Name}" name="Name" />
+                            <span  class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Błąd nazwy</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Opis</label>
+                            <textarea  class="form-control" id="inputDescription" placeholder="Opis grupy" th:field="*{description}" rows="3"  name="description" ></textarea>
+                        </div>
+                        <div class="text-right">
+                            <a href="/contacts" th:href="@{/groups}" class="btn btn-default">Anuluj</a>
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+ <th:block th:include="fragments/js :: body"></th:block>
+
+</body>
+</html>

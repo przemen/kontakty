@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontakty - Lista Grup</title>
+     <th:block th:include="fragments/head :: head"></th:block>
+</head>
+<body>
+  <th:block th:include="fragments/header :: body"></th:block>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <!--<div class="container">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Grupa</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="inputId">ID</label>
+                        <input type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{group.id}" name="id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName">Nazwa</label>
+                        <input type="text" class="form-control" id="inputLastName" placeholder="Nazwa" th:field="*{group.name}" name="Nazwa" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFirstName">Opis</label>
+                        <input type="text" class="form-control" id="inputFirstName" placeholder="Opis" th:field="*{group.description}" name="Opis" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <a th:href="${'/groups/addcontacts/'+group.id}" class="btn btn-default">Dodaj Kontakty do grupy</a>
+                    </div>
+                    <div class="text-right">
+                        <a href="/contacts" th:href="@{/groups}" class="btn btn-default">Cofnij</a>
+                        <a th:href="@{'/groups/edit/' + ${group.id}}" class="btn btn-primary">Edytuj</a>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div th:if="!${#lists.isEmpty(contacts)}" >
+                <div class="panel-heading"  ></div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nazwisko</th>
+                        <th>Imię</th>
+                        <th>Adres</th>
+                        <th>Akcja</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div >
+                        Kontakty należące do tej grupy
+                        <tr th:each = "contact : ${contacts}">
+                            <td th:text = "${contact.id}"></td>
+                            <td th:text = "${contact.lastName}"></td>
+                            <td th:text = "${contact.firstName}"></td>
+                            <td th:text = "${contact.address}"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <a th:href="${'/contacts/view/' + contact.id}" class="btn btn-info"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                    <a th:href="${'/contacts/edit/' + contact.id}" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                    <a th:href="${'/contacts/delete/' + contact.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
+
+
+                    </tbody>
+                </table>
+                </div>
+                <div th:if="${#lists.isEmpty(contacts)}">
+                    <tr>
+                        <td>Brak kontaktów w tej grupie!</td>
+                    </tr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--/*/ <th:block th:include="fragments/js :: body"></th:block> /*/-->
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+</html>
